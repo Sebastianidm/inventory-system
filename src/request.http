@@ -1,0 +1,29 @@
+### Obtener todos los productos (GET)
+GET http://localhost:8080/api/products
+
+### Crear un nuevo producto (POST)
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+  "name": "Silla Ergonómica",
+  "price": 120.50
+}
+
+### Actualizar el producto con ID 1 (PUT)
+PUT http://localhost:8080/api/products/1
+Content-Type: application/json
+
+{
+  "name": "Silla Gamer RGB",
+  "price": 250.00
+}
+
+### Verificar que se actualizó (GET individual)
+GET http://localhost:8080/api/products/1
+
+### Borrar el producto 1 (DELETE)
+DELETE http://localhost:8080/api/products/1
+
+### Verificar que ya no existe (Debe dar 404)
+GET http://localhost:8080/api/products/1
