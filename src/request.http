@@ -6,8 +6,8 @@ POST http://localhost:8080/api/products
 Content-Type: application/json
 
 {
-  "name": "Silla Ergonómica",
-  "price": 120.50
+  "name": "Silla Negativa",
+  "price": -500
 }
 
 ### Actualizar el producto con ID 1 (PUT)
@@ -20,10 +20,29 @@ Content-Type: application/json
 }
 
 ### Verificar que se actualizó (GET individual)
-GET http://localhost:8080/api/products/1
+GET http://localhost:8080/api/products/99999
 
 ### Borrar el producto 1 (DELETE)
 DELETE http://localhost:8080/api/products/1
 
 ### Verificar que ya no existe (Debe dar 404)
 GET http://localhost:8080/api/products/1
+
+
+### Prueba de Validación: Precio Negativo (Debe fallar)
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+  "name": "Producto Malo",
+  "price": -100.0
+}
+
+### Prueba de Validación: Nombre Vacío (Debe fallar)
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+  "name": "",
+  "price": 50.0
+}

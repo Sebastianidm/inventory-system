@@ -1,46 +1,43 @@
-# Inventory Management System API 📦
+# Inventory Management System API 
 
-Una API RESTful robusta diseñada para la gestión de inventario empresarial. Este proyecto demuestra la implementación de una arquitectura escalable utilizando el ecosistema **Spring Boot**, siguiendo principios de diseño limpio y buenas prácticas de desarrollo backend.
+API RESTful profesional para gestión de inventario. Este proyecto implementa una arquitectura robusta utilizando **Spring Boot**, persistencia de datos real y documentación automática.
 
-## 🚀 Tecnologías y Herramientas
+## Características Principales
 
-* **Lenguaje:** Java 24 (Target 17/21 LTS)
-* **Framework:** Spring Boot 3
-* **ORM:** Spring Data JPA (Hibernate)
-* **Base de Datos:** H2 Database (In-Memory para desarrollo)
-* **Herramientas:** Maven, Lombok, IntelliJ IDEA
+* **CRUD Completo:** Gestión de productos (Crear, Leer, Actualizar, Eliminar).
+* **Base de Datos Real:** Persistencia utilizando **PostgreSQL**.
+* **Validaciones Robustas:** Protección de datos con Jakarta Validation (`@NotNull`, `@Min`, etc.).
+* **Manejo de Errores Global:** Arquitectura centralizada de excepciones con `@ControllerAdvice`.
+* **Documentación Viva:** Interfaz interactiva con **Swagger UI / OpenAPI**.
+* **Seguridad:** Gestión de credenciales mediante Variables de Entorno.
 
-## 🏗️ Arquitectura del Proyecto
+## Tecnologías
 
-El sistema sigue una arquitectura en capas clásica para asegurar la separación de responsabilidades:
+* Java 24
+* Spring Boot 3+ (v4.0.1 Experimental)
+* Spring Data JPA (Hibernate)
+* PostgreSQL 16
+* Lombok
+* OpenAPI (Swagger)
 
-1.  **Controller Layer:** Puntos de entrada de la API. Maneja las peticiones HTTP y los códigos de respuesta.
-2.  **Service Layer:** Contiene la lógica de negocio pura. Decopla el controlador del acceso a datos.
-3.  **Repository Layer:** Interfaz con la base de datos utilizando `JpaRepository`.
-4.  **Model Layer:** Entidades JPA que representan la estructura de la base de datos.
+## Documentación de la API (Swagger)
 
-## 🔌 API Endpoints
+Una vez iniciada la aplicación, puedes probar todos los endpoints e interactuar con el sistema aquí:
+**[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)**
 
-| Método | Endpoint             | Descripción                                      |
-| :---   | :---                 | :---                                             |
-| `GET`    | `/api/products`      | Obtener listado completo de productos            |
-| `GET`    | `/api/products/{id}` | Buscar un producto específico por ID             |
-| `POST`   | `/api/products`      | Crear un nuevo producto (JSON Body)              |
-| `PUT`    | `/api/products/{id}` | Actualizar información de un producto existente  |
-| `DELETE` | `/api/products/{id}` | Eliminar un producto del sistema                 |
+## Configuración e Instalación
 
-## 🛠️ Instalación y Ejecución
+### Requisitos Previos
+* Tener **PostgreSQL** instalado y ejecutándose.
+* Crear una base de datos llamada `inventory`.
 
-1.  **Clonar el repositorio:**
-    ```bash
-    git clone [https://github.com/sebastianidm/inventory-system.git](https://github.com/sebastianidm/inventory-system.git)
-    ```
-2.  **Ejecutar la aplicación:**
-    ```bash
-    ./mvnw spring-boot:run
-    ```
-3.  **Acceder a la API:**
-    El servidor iniciará en `http://localhost:8080`.
+### Variables de Entorno (Importante)
+Por seguridad, este proyecto no contiene contraseñas en el código. Debes configurar la siguiente variable de entorno en tu IDE o sistema operativo antes de ejecutar:
 
----
-**Desarrollado por [SebastianIDM](https://github.com/sebastianidm)**
+| Variable | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `DB_PASSWORD` | Tu contraseña local de PostgreSQL | `mi_password_secreto` |
+
+### Ejecución
+```bash
+./mvnw spring-boot:run

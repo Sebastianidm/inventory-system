@@ -1,5 +1,6 @@
 package com.sebastianidm.inventory.services;
 
+import com.sebastianidm.inventory.exceptions.ResourceNotFoundException;
 import com.sebastianidm.inventory.models.Product;
 import com.sebastianidm.inventory.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -27,30 +28,29 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    // Retorna un Optional para evitar NullPointerExceptions si el ID no existe.
-    public Optional<Product> getProductById(Long id) {
-        return productRepository.findById(id);
+    public Product getProductById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró el producto con ID: " + id));
     }
 
     public Product saveProduct(Product product) {
-        // save() sirve para INSERT (si no tiene ID) y UPDATE (si tiene ID).
         return productRepository.save(product);
     }
 
-    public Optional<Product> updateProduct(Long id, Product productDetails) {
-        // 1. Buscamos si existe. 2. Si existe, actualizamos y guardamos.
-        return productRepository.findById(id).map(existingProduct -> {
-            existingProduct.setName(productDetails.getName());
-            existingProduct.setPrice(productDetails.getPrice());
-            return productRepository.save(existingProduct);
-        });
+
+
+    public Product updateProduct(Long id, Product productDetails) {
+        Product existingProduct = getProductById(id);
+        existingProduct.setName(productDetails.getName());
+        existingProduct.setPrice(productDetails.getPrice());
+        return productRepository.save(existingProduct);
     }
 
-    public boolean deleteProduct(Long id) {
-        if (productRepository.existsById(id)) {
-            productRepository.deleteById(id);
-            return true;
+
+    public void deleteProduct(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new ResourceNotFoundException("No se puede eliminar. El producto con ID " + id + " no existe.");
         }
-        return false;
+        productRepository.deleteById(id);
     }
 }

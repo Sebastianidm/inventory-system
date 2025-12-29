@@ -11,6 +11,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    // No es necesario escribir código aquí.
-    // Spring Data JPA implementa métodos como save(), findAll(), findById(), deleteById() en tiempo de ejecución.
 }
